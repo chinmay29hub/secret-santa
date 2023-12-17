@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Snowfall from 'react-snowfall';
+import GiftBoxAnimation from './GiftBoxAnimation';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -15,6 +16,7 @@ root.render(
       radius={[0.5, 5]}
       />
     <App />
+      {/* <GiftBoxAnimation /> */}
   </React.StrictMode>
 );
 
