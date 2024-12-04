@@ -13,6 +13,7 @@
     "react-scripts": "5.0.1",
     "react-snowfall": "^1.2.1",
     "sass": "^1.69.5",
+    "secret-santa-app": "file:",
     "serve": "^14.2.1",
     "web-vitals": "^2.1.4"
   },

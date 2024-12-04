@@ -10,8 +10,8 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Snowfall
-      snowflakeCount={40}
-      speed={[0.5, 0.5]}
+      snowflakeCount={50}
+      speed={[0.5, 1]}
       wind={[1, 1]}
       radius={[0.5, 5]}
       />

@@ -10,11 +10,11 @@ function Original() {
   const [randomName, setRandomName] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   const getRandomName = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/participant');
+      const response = await fetch(`${process.env.REACT_APP_NODE_SERVER}/api/participant`);
       const data = await response.json();
       setRandomName(data.name);
     } catch (error) {
@@ -24,7 +24,7 @@ function Original() {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/login', {
+      const response = await fetch(`${process.env.REACT_APP_NODE_SERVER}/api/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -46,45 +46,31 @@ function Original() {
   };
 
   return (
-    <div className="h-screen flex items-center justify-center">
+    <>
+    { !randomName && (
+      <div className="h-screen flex items-center justify-center">
       {/* <GiftBoxAnimation /> */}
       <div className="w-full max-w-lg bg-white p-4 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-col items-center">
     <div className="flex justify-end px-4 pt-4"></div>
-      <h1 className="dark:text-white text-5xl font-extrabold tracking-tight">Secret Santa</h1>
+      <h1 className="dark:text-white text-5xl font-extrabold tracking-tight p-6">Secret Santa</h1>
       {isLoggedIn ? (
         <>
           {/* <div> */}
             {/* Your Secret Santa content goes here */}
-            {randomName && <p class="max-w-lg text-3xl font-semibold leading-relaxed text-gray-900 dark:text-white">Selected Participant: {randomName}</p>}
+            {/* {randomName && <p class="max-w-lg text-3xl font-semibold leading-relaxed text-gray-900 dark:text-white">Selected Participant: {randomName}</p>} */}
+            {randomName && (
+            <GiftBoxAnimation randomName={randomName} />
+          )}
+
+          
             <img
           src="/images/santa.gif"
           alt="GIF"
-          className="h-auto max-w-xs rounded-lg shadow-md"
+          className="h-auto max-w-xs rounded-lg shadow-md mb-6"
         />
             <button className="text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" onClick={getRandomName}>Start Now!</button>
           {/* </div> */}
         </>
-  //       <div className="mt-8 flex flex-col items-center">
-  //   {randomName && (
-  //     <>
-  //       <p className="max-w-lg text-3xl font-semibold leading-relaxed text-gray-900 dark:text-white mb-4">
-  //         Selected Participant: {randomName}
-  //       </p>
-  //       {/* Placeholder GIF, replace with your actual GIF URL */}
-  //       <img
-  //         src="/images/santa.gif"
-  //         alt="GIF"
-  //         className="h-auto max-w-xs rounded-lg shadow-md"
-  //       />
-  //       <button
-  //         className="text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-  //         onClick={getRandomName}
-  //       >
-  //         Start Now!
-  //       </button>
-  //     </>
-  //   )}
-  // </div>
       ) :(
         <div className="grid gap-3 mb-6 p-3 w-full">
           <div className="mb-2">
@@ -111,6 +97,12 @@ function Original() {
       )}
       </div>
     </div>
+    ) }
+    { randomName && (
+            <GiftBoxAnimation randomName={randomName} />
+    ) }
+    </>
+    
   );
 }
 
