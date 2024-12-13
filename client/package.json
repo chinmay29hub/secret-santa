@@ -14,7 +14,7 @@
     "react-snowfall": "^1.2.1",
     "sass": "^1.69.5",
     "secret-santa-app": "file:",
-    "serve": "^14.2.1",
+    "serve": "^14.2.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
